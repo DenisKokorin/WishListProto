@@ -4,7 +4,7 @@
 // - protoc             v5.27.3
 // source: wishlist.proto
 
-package deniskokorin_wishlist
+package wl
 
 import (
 	context "context"

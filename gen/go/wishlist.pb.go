@@ -4,7 +4,7 @@
 // 	protoc        v5.27.3
 // source: wishlist.proto
 
-package deniskokorin_wishlist
+package wl
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -663,7 +663,7 @@ const file_wishlist_proto_rawDesc = "" +
 	"\n" +
 	"UpdateItem\x12\x1b.wishlist.UpdateItemRequest\x1a\x16.wishlist.ItemResponse\x12G\n" +
 	"\n" +
-	"DeleteItem\x12\x1b.wishlist.DeleteItemRequest\x1a\x1c.wishlist.DeleteItemResponseB\x17Z\x15deniskokorin.wishlistb\x06proto3"
+	"DeleteItem\x12\x1b.wishlist.DeleteItemRequest\x1a\x1c.wishlist.DeleteItemResponseB\x1aZ\x18deniskokorin.wishlist;wlb\x06proto3"
 
 var (
 	file_wishlist_proto_rawDescOnce sync.Once

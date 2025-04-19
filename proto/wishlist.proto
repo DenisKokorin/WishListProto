@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package wishlist;
 
-option go_package = "deniskokorin.wishlist";
+option go_package = "deniskokorin.wishlist;wl";
 
 service WishlistService {
     rpc CreateWishlist (CreateWishlistRequest) returns (WishListResponse);
