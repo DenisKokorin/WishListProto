@@ -4,6 +4,7 @@
 // 	protoc        v5.27.3
 // source: wishlist.proto
 
+
 package wl
 
 import (
