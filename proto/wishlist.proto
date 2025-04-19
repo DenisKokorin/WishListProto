@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package wishlist;
+
+option go_package = "deniskokorin.wishlist";
+
+service WishlistService {
+    rpc CreateWishlist (CreateWishlistRequest) returns (WishListResponse);
+    rpc GetWishList (GetWishListRequest) returns (WishListResponse);
+    rpc UpdateWishList (UpdateWishListRequest) returns (WishListResponse);
+    rpc DeleteWishList (DeleteWishListRequest) returns (DeleteWishListResponse);
+    rpc AddItem (AddItemRequest) returns (ItemResponse);
+    rpc UpdateItem (UpdateItemRequest) returns (ItemResponse);
+    rpc DeleteItem (DeleteItemRequest) returns(DeleteItemResponse);
+}
+
+message ItemResponse {
+    int64 id = 1;
+    string title = 2;
+}
+
+message WishListResponse {
+    int64 id = 1;
+    string title = 2;
+    repeated ItemResponse items = 3;
+}
+
+message AddItemRequest {
+    int64 wishlist_id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message UpdateItemRequest {
+    int64 wishlist_id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message DeleteItemResponse {
+    string msg = 1;
+}
+
+message DeleteItemRequest {
+    int64 wishlist_id = 1;
+    string title = 2;
+}
+
+message CreateWishlistRequest {
+    int64 user_id = 1;
+    string title = 2;
+    bool is_private = 3;
+}
+
+message GetWishListRequest {
+    int64 user_id = 1;
+}
+
+message UpdateWishListRequest {
+    int64 user_id = 1;
+    string title = 2;
+    bool is_private = 3;
+}
+
+message DeleteWishListRequest {
+    int64 user_id = 1;
+    string title = 2;
+}
+
+message DeleteWishListResponse {
+    string msg = 1;
+}
