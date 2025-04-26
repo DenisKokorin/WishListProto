@@ -15,26 +15,37 @@ service WishlistService {
 }
 
 message ItemResponse {
-    int64 id = 1;
-    string title = 2;
+    repeated ItemResp items = 1;
 }
 
 message WishListResponse {
     int64 id = 1;
+    string title = 3;
+    bool is_private = 4;
+    ItemResponse items = 5;
+}
+
+message ItemReq {
+    string title = 1;
+    string description = 2;
+}
+
+message ItemResp {
+    int64 id = 1;
     string title = 2;
-    repeated ItemResponse items = 3;
+    string description = 3;
 }
 
 message AddItemRequest {
-    int64 wishlist_id = 1;
-    string title = 2;
-    string description = 3;
+    int64 user_id = 1;
+    int64 wishlist_id = 2;
+    repeated ItemReq items = 3;
 }
 
 message UpdateItemRequest {
-    int64 wishlist_id = 1;
-    string title = 2;
-    string description = 3;
+    int64 user_id = 1;
+    int64 wishlist_id = 2;
+    repeated ItemReq items = 3;
 }
 
 message DeleteItemResponse {
@@ -42,8 +53,9 @@ message DeleteItemResponse {
 }
 
 message DeleteItemRequest {
-    int64 wishlist_id = 1;
-    string title = 2;
+    int64 user_id = 1;
+    int64 wishlist_id = 2;
+    string title = 3;
 }
 
 message CreateWishlistRequest {
@@ -54,6 +66,7 @@ message CreateWishlistRequest {
 
 message GetWishListRequest {
     int64 user_id = 1;
+    int64 wishlist_id = 2;
 }
 
 message UpdateWishListRequest {
