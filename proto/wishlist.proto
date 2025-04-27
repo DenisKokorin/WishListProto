@@ -9,20 +9,16 @@ service WishlistService {
     rpc GetWishList (GetWishListRequest) returns (WishListResponse);
     rpc UpdateWishList (UpdateWishListRequest) returns (WishListResponse);
     rpc DeleteWishList (DeleteWishListRequest) returns (DeleteWishListResponse);
-    rpc AddItem (AddItemRequest) returns (ItemResponse);
-    rpc UpdateItem (UpdateItemRequest) returns (ItemResponse);
-    rpc DeleteItem (DeleteItemRequest) returns(DeleteItemResponse);
-}
-
-message ItemResponse {
-    repeated ItemResp items = 1;
+    rpc AddItem (AddItemRequest) returns (WishListResponse);
+    rpc UpdateItem (UpdateItemRequest) returns (WishListResponse);
+    rpc DeleteItem (DeleteItemRequest) returns(WishListResponse);
 }
 
 message WishListResponse {
     int64 id = 1;
     string title = 3;
     bool is_private = 4;
-    ItemResponse items = 5;
+    repeated ItemResp items = 5;
 }
 
 message ItemReq {
@@ -46,10 +42,6 @@ message UpdateItemRequest {
     int64 user_id = 1;
     int64 wishlist_id = 2;
     repeated ItemReq items = 3;
-}
-
-message DeleteItemResponse {
-    string msg = 1;
 }
 
 message DeleteItemRequest {

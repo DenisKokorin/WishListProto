@@ -36,9 +36,9 @@ type WishlistServiceClient interface {
 	GetWishList(ctx context.Context, in *GetWishListRequest, opts ...grpc.CallOption) (*WishListResponse, error)
 	UpdateWishList(ctx context.Context, in *UpdateWishListRequest, opts ...grpc.CallOption) (*WishListResponse, error)
 	DeleteWishList(ctx context.Context, in *DeleteWishListRequest, opts ...grpc.CallOption) (*DeleteWishListResponse, error)
-	AddItem(ctx context.Context, in *AddItemRequest, opts ...grpc.CallOption) (*ItemResponse, error)
-	UpdateItem(ctx context.Context, in *UpdateItemRequest, opts ...grpc.CallOption) (*ItemResponse, error)
-	DeleteItem(ctx context.Context, in *DeleteItemRequest, opts ...grpc.CallOption) (*DeleteItemResponse, error)
+	AddItem(ctx context.Context, in *AddItemRequest, opts ...grpc.CallOption) (*WishListResponse, error)
+	UpdateItem(ctx context.Context, in *UpdateItemRequest, opts ...grpc.CallOption) (*WishListResponse, error)
+	DeleteItem(ctx context.Context, in *DeleteItemRequest, opts ...grpc.CallOption) (*WishListResponse, error)
 }
 
 type wishlistServiceClient struct {
@@ -89,9 +89,9 @@ func (c *wishlistServiceClient) DeleteWishList(ctx context.Context, in *DeleteWi
 	return out, nil
 }
 
-func (c *wishlistServiceClient) AddItem(ctx context.Context, in *AddItemRequest, opts ...grpc.CallOption) (*ItemResponse, error) {
+func (c *wishlistServiceClient) AddItem(ctx context.Context, in *AddItemRequest, opts ...grpc.CallOption) (*WishListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ItemResponse)
+	out := new(WishListResponse)
 	err := c.cc.Invoke(ctx, WishlistService_AddItem_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -99,9 +99,9 @@ func (c *wishlistServiceClient) AddItem(ctx context.Context, in *AddItemRequest,
 	return out, nil
 }
 
-func (c *wishlistServiceClient) UpdateItem(ctx context.Context, in *UpdateItemRequest, opts ...grpc.CallOption) (*ItemResponse, error) {
+func (c *wishlistServiceClient) UpdateItem(ctx context.Context, in *UpdateItemRequest, opts ...grpc.CallOption) (*WishListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ItemResponse)
+	out := new(WishListResponse)
 	err := c.cc.Invoke(ctx, WishlistService_UpdateItem_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -109,9 +109,9 @@ func (c *wishlistServiceClient) UpdateItem(ctx context.Context, in *UpdateItemRe
 	return out, nil
 }
 
-func (c *wishlistServiceClient) DeleteItem(ctx context.Context, in *DeleteItemRequest, opts ...grpc.CallOption) (*DeleteItemResponse, error) {
+func (c *wishlistServiceClient) DeleteItem(ctx context.Context, in *DeleteItemRequest, opts ...grpc.CallOption) (*WishListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteItemResponse)
+	out := new(WishListResponse)
 	err := c.cc.Invoke(ctx, WishlistService_DeleteItem_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -127,9 +127,9 @@ type WishlistServiceServer interface {
 	GetWishList(context.Context, *GetWishListRequest) (*WishListResponse, error)
 	UpdateWishList(context.Context, *UpdateWishListRequest) (*WishListResponse, error)
 	DeleteWishList(context.Context, *DeleteWishListRequest) (*DeleteWishListResponse, error)
-	AddItem(context.Context, *AddItemRequest) (*ItemResponse, error)
-	UpdateItem(context.Context, *UpdateItemRequest) (*ItemResponse, error)
-	DeleteItem(context.Context, *DeleteItemRequest) (*DeleteItemResponse, error)
+	AddItem(context.Context, *AddItemRequest) (*WishListResponse, error)
+	UpdateItem(context.Context, *UpdateItemRequest) (*WishListResponse, error)
+	DeleteItem(context.Context, *DeleteItemRequest) (*WishListResponse, error)
 	mustEmbedUnimplementedWishlistServiceServer()
 }
 
@@ -152,13 +152,13 @@ func (UnimplementedWishlistServiceServer) UpdateWishList(context.Context, *Updat
 func (UnimplementedWishlistServiceServer) DeleteWishList(context.Context, *DeleteWishListRequest) (*DeleteWishListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteWishList not implemented")
 }
-func (UnimplementedWishlistServiceServer) AddItem(context.Context, *AddItemRequest) (*ItemResponse, error) {
+func (UnimplementedWishlistServiceServer) AddItem(context.Context, *AddItemRequest) (*WishListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddItem not implemented")
 }
-func (UnimplementedWishlistServiceServer) UpdateItem(context.Context, *UpdateItemRequest) (*ItemResponse, error) {
+func (UnimplementedWishlistServiceServer) UpdateItem(context.Context, *UpdateItemRequest) (*WishListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateItem not implemented")
 }
-func (UnimplementedWishlistServiceServer) DeleteItem(context.Context, *DeleteItemRequest) (*DeleteItemResponse, error) {
+func (UnimplementedWishlistServiceServer) DeleteItem(context.Context, *DeleteItemRequest) (*WishListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteItem not implemented")
 }
 func (UnimplementedWishlistServiceServer) mustEmbedUnimplementedWishlistServiceServer() {}
