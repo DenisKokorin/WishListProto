@@ -23,6 +23,7 @@ const (
 	GroupService_GetGroup_FullMethodName     = "/group.GroupService/GetGroup"
 	GroupService_GetAllGroups_FullMethodName = "/group.GroupService/GetAllGroups"
 	GroupService_InviteUser_FullMethodName   = "/group.GroupService/InviteUser"
+	GroupService_AcceptInvite_FullMethodName = "/group.GroupService/AcceptInvite"
 	GroupService_DeleteGroup_FullMethodName  = "/group.GroupService/DeleteGroup"
 	GroupService_LeaveGroup_FullMethodName   = "/group.GroupService/LeaveGroup"
 )
@@ -34,7 +35,8 @@ type GroupServiceClient interface {
 	CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...grpc.CallOption) (*GroupResponse, error)
 	GetGroup(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*GroupResponse, error)
 	GetAllGroups(ctx context.Context, in *AllGroupsRequest, opts ...grpc.CallOption) (*AllGroupsResponse, error)
-	InviteUser(ctx context.Context, in *InviteRequest, opts ...grpc.CallOption) (*InviteResponse, error)
+	InviteUser(ctx context.Context, in *InviteRequest, opts ...grpc.CallOption) (*Invite, error)
+	AcceptInvite(ctx context.Context, in *Invite, opts ...grpc.CallOption) (*AcceptResponse, error)
 	DeleteGroup(ctx context.Context, in *DeleteGroupRequest, opts ...grpc.CallOption) (*DeleteGroupResponse, error)
 	LeaveGroup(ctx context.Context, in *LeaveRequest, opts ...grpc.CallOption) (*LeaveResponse, error)
 }
@@ -77,10 +79,20 @@ func (c *groupServiceClient) GetAllGroups(ctx context.Context, in *AllGroupsRequ
 	return out, nil
 }
 
-func (c *groupServiceClient) InviteUser(ctx context.Context, in *InviteRequest, opts ...grpc.CallOption) (*InviteResponse, error) {
+func (c *groupServiceClient) InviteUser(ctx context.Context, in *InviteRequest, opts ...grpc.CallOption) (*Invite, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(InviteResponse)
+	out := new(Invite)
 	err := c.cc.Invoke(ctx, GroupService_InviteUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupServiceClient) AcceptInvite(ctx context.Context, in *Invite, opts ...grpc.CallOption) (*AcceptResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AcceptResponse)
+	err := c.cc.Invoke(ctx, GroupService_AcceptInvite_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +126,8 @@ type GroupServiceServer interface {
 	CreateGroup(context.Context, *CreateGroupRequest) (*GroupResponse, error)
 	GetGroup(context.Context, *GetGroupRequest) (*GroupResponse, error)
 	GetAllGroups(context.Context, *AllGroupsRequest) (*AllGroupsResponse, error)
-	InviteUser(context.Context, *InviteRequest) (*InviteResponse, error)
+	InviteUser(context.Context, *InviteRequest) (*Invite, error)
+	AcceptInvite(context.Context, *Invite) (*AcceptResponse, error)
 	DeleteGroup(context.Context, *DeleteGroupRequest) (*DeleteGroupResponse, error)
 	LeaveGroup(context.Context, *LeaveRequest) (*LeaveResponse, error)
 	mustEmbedUnimplementedGroupServiceServer()
@@ -136,8 +149,11 @@ func (UnimplementedGroupServiceServer) GetGroup(context.Context, *GetGroupReques
 func (UnimplementedGroupServiceServer) GetAllGroups(context.Context, *AllGroupsRequest) (*AllGroupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllGroups not implemented")
 }
-func (UnimplementedGroupServiceServer) InviteUser(context.Context, *InviteRequest) (*InviteResponse, error) {
+func (UnimplementedGroupServiceServer) InviteUser(context.Context, *InviteRequest) (*Invite, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InviteUser not implemented")
+}
+func (UnimplementedGroupServiceServer) AcceptInvite(context.Context, *Invite) (*AcceptResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptInvite not implemented")
 }
 func (UnimplementedGroupServiceServer) DeleteGroup(context.Context, *DeleteGroupRequest) (*DeleteGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteGroup not implemented")
@@ -238,6 +254,24 @@ func _GroupService_InviteUser_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GroupService_AcceptInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Invite)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupServiceServer).AcceptInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GroupService_AcceptInvite_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupServiceServer).AcceptInvite(ctx, req.(*Invite))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GroupService_DeleteGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteGroupRequest)
 	if err := dec(in); err != nil {
@@ -296,6 +330,10 @@ var GroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "InviteUser",
 			Handler:    _GroupService_InviteUser_Handler,
+		},
+		{
+			MethodName: "AcceptInvite",
+			Handler:    _GroupService_AcceptInvite_Handler,
 		},
 		{
 			MethodName: "DeleteGroup",

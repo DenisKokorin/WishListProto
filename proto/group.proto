@@ -8,7 +8,8 @@ service GroupService {
     rpc CreateGroup (CreateGroupRequest) returns (GroupResponse);
     rpc GetGroup (GetGroupRequest) returns (GroupResponse);
     rpc GetAllGroups (AllGroupsRequest) returns (AllGroupsResponse);
-    rpc InviteUser (InviteRequest) returns (InviteResponse);
+    rpc InviteUser (InviteRequest) returns (Invite);
+    rpc AcceptInvite (Invite) returns (AcceptResponse);
     rpc DeleteGroup (DeleteGroupRequest) returns (DeleteGroupResponse);
     rpc LeaveGroup (LeaveRequest) returns (LeaveResponse);
 }
@@ -54,7 +55,11 @@ message AllGroupsResponse {
     repeated Group groups = 1;
 }
 
-message InviteResponse {
+message Invite {
+    string token = 1;
+}
+
+message AcceptResponse {
     string success = 1;
 }
 

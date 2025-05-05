@@ -457,27 +457,27 @@ func (x *AllGroupsResponse) GetGroups() []*Group {
 	return nil
 }
 
-type InviteResponse struct {
+type Invite struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       string                 `protobuf:"bytes,1,opt,name=success,proto3" json:"success,omitempty"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *InviteResponse) Reset() {
-	*x = InviteResponse{}
+func (x *Invite) Reset() {
+	*x = Invite{}
 	mi := &file_group_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *InviteResponse) String() string {
+func (x *Invite) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*InviteResponse) ProtoMessage() {}
+func (*Invite) ProtoMessage() {}
 
-func (x *InviteResponse) ProtoReflect() protoreflect.Message {
+func (x *Invite) ProtoReflect() protoreflect.Message {
 	mi := &file_group_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -489,12 +489,56 @@ func (x *InviteResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use InviteResponse.ProtoReflect.Descriptor instead.
-func (*InviteResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use Invite.ProtoReflect.Descriptor instead.
+func (*Invite) Descriptor() ([]byte, []int) {
 	return file_group_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *InviteResponse) GetSuccess() string {
+func (x *Invite) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+type AcceptResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       string                 `protobuf:"bytes,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AcceptResponse) Reset() {
+	*x = AcceptResponse{}
+	mi := &file_group_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AcceptResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AcceptResponse) ProtoMessage() {}
+
+func (x *AcceptResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_group_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AcceptResponse.ProtoReflect.Descriptor instead.
+func (*AcceptResponse) Descriptor() ([]byte, []int) {
+	return file_group_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *AcceptResponse) GetSuccess() string {
 	if x != nil {
 		return x.Success
 	}
@@ -510,7 +554,7 @@ type DeleteGroupResponse struct {
 
 func (x *DeleteGroupResponse) Reset() {
 	*x = DeleteGroupResponse{}
-	mi := &file_group_proto_msgTypes[10]
+	mi := &file_group_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -522,7 +566,7 @@ func (x *DeleteGroupResponse) String() string {
 func (*DeleteGroupResponse) ProtoMessage() {}
 
 func (x *DeleteGroupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_group_proto_msgTypes[10]
+	mi := &file_group_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -535,7 +579,7 @@ func (x *DeleteGroupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGroupResponse.ProtoReflect.Descriptor instead.
 func (*DeleteGroupResponse) Descriptor() ([]byte, []int) {
-	return file_group_proto_rawDescGZIP(), []int{10}
+	return file_group_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DeleteGroupResponse) GetSuccess() string {
@@ -554,7 +598,7 @@ type LeaveResponse struct {
 
 func (x *LeaveResponse) Reset() {
 	*x = LeaveResponse{}
-	mi := &file_group_proto_msgTypes[11]
+	mi := &file_group_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -566,7 +610,7 @@ func (x *LeaveResponse) String() string {
 func (*LeaveResponse) ProtoMessage() {}
 
 func (x *LeaveResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_group_proto_msgTypes[11]
+	mi := &file_group_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -579,7 +623,7 @@ func (x *LeaveResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LeaveResponse.ProtoReflect.Descriptor instead.
 func (*LeaveResponse) Descriptor() ([]byte, []int) {
-	return file_group_proto_rawDescGZIP(), []int{11}
+	return file_group_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *LeaveResponse) GetSuccess() string {
@@ -616,19 +660,22 @@ const file_group_proto_rawDesc = "" +
 	"\x05title\x18\x01 \x01(\v2\f.group.GroupR\x05title\x12\x18\n" +
 	"\amembers\x18\x03 \x03(\x03R\amembers\"9\n" +
 	"\x11AllGroupsResponse\x12$\n" +
-	"\x06groups\x18\x01 \x03(\v2\f.group.GroupR\x06groups\"*\n" +
-	"\x0eInviteResponse\x12\x18\n" +
+	"\x06groups\x18\x01 \x03(\v2\f.group.GroupR\x06groups\"\x1e\n" +
+	"\x06Invite\x12\x14\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"*\n" +
+	"\x0eAcceptResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\tR\asuccess\"/\n" +
 	"\x13DeleteGroupResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\tR\asuccess\")\n" +
 	"\rLeaveResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\tR\asuccess2\x85\x03\n" +
+	"\asuccess\x18\x01 \x01(\tR\asuccess2\xb3\x03\n" +
 	"\fGroupService\x12>\n" +
 	"\vCreateGroup\x12\x19.group.CreateGroupRequest\x1a\x14.group.GroupResponse\x128\n" +
 	"\bGetGroup\x12\x16.group.GetGroupRequest\x1a\x14.group.GroupResponse\x12A\n" +
-	"\fGetAllGroups\x12\x17.group.AllGroupsRequest\x1a\x18.group.AllGroupsResponse\x129\n" +
+	"\fGetAllGroups\x12\x17.group.AllGroupsRequest\x1a\x18.group.AllGroupsResponse\x121\n" +
 	"\n" +
-	"InviteUser\x12\x14.group.InviteRequest\x1a\x15.group.InviteResponse\x12D\n" +
+	"InviteUser\x12\x14.group.InviteRequest\x1a\r.group.Invite\x124\n" +
+	"\fAcceptInvite\x12\r.group.Invite\x1a\x15.group.AcceptResponse\x12D\n" +
 	"\vDeleteGroup\x12\x19.group.DeleteGroupRequest\x1a\x1a.group.DeleteGroupResponse\x127\n" +
 	"\n" +
 	"LeaveGroup\x12\x13.group.LeaveRequest\x1a\x14.group.LeaveResponseB\x17Z\x15deniskokorin.group;grb\x06proto3"
@@ -645,7 +692,7 @@ func file_group_proto_rawDescGZIP() []byte {
 	return file_group_proto_rawDescData
 }
 
-var file_group_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_group_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_group_proto_goTypes = []any{
 	(*CreateGroupRequest)(nil),  // 0: group.CreateGroupRequest
 	(*GetGroupRequest)(nil),     // 1: group.GetGroupRequest
@@ -656,9 +703,10 @@ var file_group_proto_goTypes = []any{
 	(*Group)(nil),               // 6: group.Group
 	(*GroupResponse)(nil),       // 7: group.GroupResponse
 	(*AllGroupsResponse)(nil),   // 8: group.AllGroupsResponse
-	(*InviteResponse)(nil),      // 9: group.InviteResponse
-	(*DeleteGroupResponse)(nil), // 10: group.DeleteGroupResponse
-	(*LeaveResponse)(nil),       // 11: group.LeaveResponse
+	(*Invite)(nil),              // 9: group.Invite
+	(*AcceptResponse)(nil),      // 10: group.AcceptResponse
+	(*DeleteGroupResponse)(nil), // 11: group.DeleteGroupResponse
+	(*LeaveResponse)(nil),       // 12: group.LeaveResponse
 }
 var file_group_proto_depIdxs = []int32{
 	6,  // 0: group.GroupResponse.title:type_name -> group.Group
@@ -667,16 +715,18 @@ var file_group_proto_depIdxs = []int32{
 	1,  // 3: group.GroupService.GetGroup:input_type -> group.GetGroupRequest
 	2,  // 4: group.GroupService.GetAllGroups:input_type -> group.AllGroupsRequest
 	3,  // 5: group.GroupService.InviteUser:input_type -> group.InviteRequest
-	4,  // 6: group.GroupService.DeleteGroup:input_type -> group.DeleteGroupRequest
-	5,  // 7: group.GroupService.LeaveGroup:input_type -> group.LeaveRequest
-	7,  // 8: group.GroupService.CreateGroup:output_type -> group.GroupResponse
-	7,  // 9: group.GroupService.GetGroup:output_type -> group.GroupResponse
-	8,  // 10: group.GroupService.GetAllGroups:output_type -> group.AllGroupsResponse
-	9,  // 11: group.GroupService.InviteUser:output_type -> group.InviteResponse
-	10, // 12: group.GroupService.DeleteGroup:output_type -> group.DeleteGroupResponse
-	11, // 13: group.GroupService.LeaveGroup:output_type -> group.LeaveResponse
-	8,  // [8:14] is the sub-list for method output_type
-	2,  // [2:8] is the sub-list for method input_type
+	9,  // 6: group.GroupService.AcceptInvite:input_type -> group.Invite
+	4,  // 7: group.GroupService.DeleteGroup:input_type -> group.DeleteGroupRequest
+	5,  // 8: group.GroupService.LeaveGroup:input_type -> group.LeaveRequest
+	7,  // 9: group.GroupService.CreateGroup:output_type -> group.GroupResponse
+	7,  // 10: group.GroupService.GetGroup:output_type -> group.GroupResponse
+	8,  // 11: group.GroupService.GetAllGroups:output_type -> group.AllGroupsResponse
+	9,  // 12: group.GroupService.InviteUser:output_type -> group.Invite
+	10, // 13: group.GroupService.AcceptInvite:output_type -> group.AcceptResponse
+	11, // 14: group.GroupService.DeleteGroup:output_type -> group.DeleteGroupResponse
+	12, // 15: group.GroupService.LeaveGroup:output_type -> group.LeaveResponse
+	9,  // [9:16] is the sub-list for method output_type
+	2,  // [2:9] is the sub-list for method input_type
 	2,  // [2:2] is the sub-list for extension type_name
 	2,  // [2:2] is the sub-list for extension extendee
 	0,  // [0:2] is the sub-list for field type_name
@@ -693,7 +743,7 @@ func file_group_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_group_proto_rawDesc), len(file_group_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
