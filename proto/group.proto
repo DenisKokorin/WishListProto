@@ -16,7 +16,8 @@ service GroupService {
 
 message CreateGroupRequest {
     int64 user_id = 1;
-    string title = 2;
+    string username = 2;
+    string title = 3;
 }
 
 message GetGroupRequest {
