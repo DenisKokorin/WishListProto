@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	WishlistService_CreateWishlist_FullMethodName = "/wishlist.WishlistService/CreateWishlist"
+	WishlistService_GetAllLists_FullMethodName    = "/wishlist.WishlistService/GetAllLists"
 	WishlistService_GetWishList_FullMethodName    = "/wishlist.WishlistService/GetWishList"
 	WishlistService_UpdateWishList_FullMethodName = "/wishlist.WishlistService/UpdateWishList"
 	WishlistService_DeleteWishList_FullMethodName = "/wishlist.WishlistService/DeleteWishList"
@@ -33,6 +34,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WishlistServiceClient interface {
 	CreateWishlist(ctx context.Context, in *CreateWishlistRequest, opts ...grpc.CallOption) (*WishListResponse, error)
+	GetAllLists(ctx context.Context, in *GetAllListsRequest, opts ...grpc.CallOption) (*AllLists, error)
 	GetWishList(ctx context.Context, in *GetWishListRequest, opts ...grpc.CallOption) (*WishListResponse, error)
 	UpdateWishList(ctx context.Context, in *UpdateWishListRequest, opts ...grpc.CallOption) (*WishListResponse, error)
 	DeleteWishList(ctx context.Context, in *DeleteWishListRequest, opts ...grpc.CallOption) (*DeleteWishListResponse, error)
@@ -53,6 +55,16 @@ func (c *wishlistServiceClient) CreateWishlist(ctx context.Context, in *CreateWi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(WishListResponse)
 	err := c.cc.Invoke(ctx, WishlistService_CreateWishlist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wishlistServiceClient) GetAllLists(ctx context.Context, in *GetAllListsRequest, opts ...grpc.CallOption) (*AllLists, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AllLists)
+	err := c.cc.Invoke(ctx, WishlistService_GetAllLists_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -124,6 +136,7 @@ func (c *wishlistServiceClient) DeleteItem(ctx context.Context, in *DeleteItemRe
 // for forward compatibility.
 type WishlistServiceServer interface {
 	CreateWishlist(context.Context, *CreateWishlistRequest) (*WishListResponse, error)
+	GetAllLists(context.Context, *GetAllListsRequest) (*AllLists, error)
 	GetWishList(context.Context, *GetWishListRequest) (*WishListResponse, error)
 	UpdateWishList(context.Context, *UpdateWishListRequest) (*WishListResponse, error)
 	DeleteWishList(context.Context, *DeleteWishListRequest) (*DeleteWishListResponse, error)
@@ -142,6 +155,9 @@ type UnimplementedWishlistServiceServer struct{}
 
 func (UnimplementedWishlistServiceServer) CreateWishlist(context.Context, *CreateWishlistRequest) (*WishListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateWishlist not implemented")
+}
+func (UnimplementedWishlistServiceServer) GetAllLists(context.Context, *GetAllListsRequest) (*AllLists, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllLists not implemented")
 }
 func (UnimplementedWishlistServiceServer) GetWishList(context.Context, *GetWishListRequest) (*WishListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWishList not implemented")
@@ -196,6 +212,24 @@ func _WishlistService_CreateWishlist_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WishlistServiceServer).CreateWishlist(ctx, req.(*CreateWishlistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WishlistService_GetAllLists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllListsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WishlistServiceServer).GetAllLists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WishlistService_GetAllLists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WishlistServiceServer).GetAllLists(ctx, req.(*GetAllListsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -318,6 +352,10 @@ var WishlistService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateWishlist",
 			Handler:    _WishlistService_CreateWishlist_Handler,
+		},
+		{
+			MethodName: "GetAllLists",
+			Handler:    _WishlistService_GetAllLists_Handler,
 		},
 		{
 			MethodName: "GetWishList",

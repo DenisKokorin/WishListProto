@@ -6,6 +6,7 @@ option go_package = "deniskokorin.wishlist;wl";
 
 service WishlistService {
     rpc CreateWishlist (CreateWishlistRequest) returns (WishListResponse);
+    rpc GetAllLists (GetAllListsRequest) returns (AllLists);
     rpc GetWishList (GetWishListRequest) returns (WishListResponse);
     rpc UpdateWishList (UpdateWishListRequest) returns (WishListResponse);
     rpc DeleteWishList (DeleteWishListRequest) returns (DeleteWishListResponse);
@@ -15,10 +16,18 @@ service WishlistService {
 }
 
 message WishListResponse {
+    WishList title = 1;
+    repeated ItemResp items = 2;
+}
+
+message AllLists {
+    repeated WishList lists = 1;
+}
+
+message WishList {
     int64 id = 1;
-    string title = 3;
-    bool is_private = 4;
-    repeated ItemResp items = 5;
+    string title = 2;
+    bool is_private = 3;
 }
 
 message ItemReq {
@@ -54,6 +63,10 @@ message CreateWishlistRequest {
     int64 user_id = 1;
     string title = 2;
     bool is_private = 3;
+}
+
+message GetAllListsRequest {
+    int64 user_id = 1;
 }
 
 message GetWishListRequest {

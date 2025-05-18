@@ -23,10 +23,8 @@ const (
 
 type WishListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	IsPrivate     bool                   `protobuf:"varint,4,opt,name=is_private,json=isPrivate,proto3" json:"is_private,omitempty"`
-	Items         []*ItemResp            `protobuf:"bytes,5,rep,name=items,proto3" json:"items,omitempty"`
+	Title         *WishList              `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	Items         []*ItemResp            `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -61,25 +59,11 @@ func (*WishListResponse) Descriptor() ([]byte, []int) {
 	return file_wishlist_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *WishListResponse) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *WishListResponse) GetTitle() string {
+func (x *WishListResponse) GetTitle() *WishList {
 	if x != nil {
 		return x.Title
 	}
-	return ""
-}
-
-func (x *WishListResponse) GetIsPrivate() bool {
-	if x != nil {
-		return x.IsPrivate
-	}
-	return false
+	return nil
 }
 
 func (x *WishListResponse) GetItems() []*ItemResp {
@@ -87,6 +71,110 @@ func (x *WishListResponse) GetItems() []*ItemResp {
 		return x.Items
 	}
 	return nil
+}
+
+type AllLists struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Lists         []*WishList            `protobuf:"bytes,1,rep,name=lists,proto3" json:"lists,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AllLists) Reset() {
+	*x = AllLists{}
+	mi := &file_wishlist_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AllLists) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AllLists) ProtoMessage() {}
+
+func (x *AllLists) ProtoReflect() protoreflect.Message {
+	mi := &file_wishlist_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AllLists.ProtoReflect.Descriptor instead.
+func (*AllLists) Descriptor() ([]byte, []int) {
+	return file_wishlist_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *AllLists) GetLists() []*WishList {
+	if x != nil {
+		return x.Lists
+	}
+	return nil
+}
+
+type WishList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	IsPrivate     bool                   `protobuf:"varint,3,opt,name=is_private,json=isPrivate,proto3" json:"is_private,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WishList) Reset() {
+	*x = WishList{}
+	mi := &file_wishlist_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WishList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WishList) ProtoMessage() {}
+
+func (x *WishList) ProtoReflect() protoreflect.Message {
+	mi := &file_wishlist_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WishList.ProtoReflect.Descriptor instead.
+func (*WishList) Descriptor() ([]byte, []int) {
+	return file_wishlist_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *WishList) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *WishList) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *WishList) GetIsPrivate() bool {
+	if x != nil {
+		return x.IsPrivate
+	}
+	return false
 }
 
 type ItemReq struct {
@@ -99,7 +187,7 @@ type ItemReq struct {
 
 func (x *ItemReq) Reset() {
 	*x = ItemReq{}
-	mi := &file_wishlist_proto_msgTypes[1]
+	mi := &file_wishlist_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -111,7 +199,7 @@ func (x *ItemReq) String() string {
 func (*ItemReq) ProtoMessage() {}
 
 func (x *ItemReq) ProtoReflect() protoreflect.Message {
-	mi := &file_wishlist_proto_msgTypes[1]
+	mi := &file_wishlist_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -124,7 +212,7 @@ func (x *ItemReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemReq.ProtoReflect.Descriptor instead.
 func (*ItemReq) Descriptor() ([]byte, []int) {
-	return file_wishlist_proto_rawDescGZIP(), []int{1}
+	return file_wishlist_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ItemReq) GetTitle() string {
@@ -152,7 +240,7 @@ type ItemResp struct {
 
 func (x *ItemResp) Reset() {
 	*x = ItemResp{}
-	mi := &file_wishlist_proto_msgTypes[2]
+	mi := &file_wishlist_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -164,7 +252,7 @@ func (x *ItemResp) String() string {
 func (*ItemResp) ProtoMessage() {}
 
 func (x *ItemResp) ProtoReflect() protoreflect.Message {
-	mi := &file_wishlist_proto_msgTypes[2]
+	mi := &file_wishlist_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -177,7 +265,7 @@ func (x *ItemResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ItemResp.ProtoReflect.Descriptor instead.
 func (*ItemResp) Descriptor() ([]byte, []int) {
-	return file_wishlist_proto_rawDescGZIP(), []int{2}
+	return file_wishlist_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ItemResp) GetId() int64 {
@@ -212,7 +300,7 @@ type AddItemRequest struct {
 
 func (x *AddItemRequest) Reset() {
 	*x = AddItemRequest{}
-	mi := &file_wishlist_proto_msgTypes[3]
+	mi := &file_wishlist_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -224,7 +312,7 @@ func (x *AddItemRequest) String() string {
 func (*AddItemRequest) ProtoMessage() {}
 
 func (x *AddItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wishlist_proto_msgTypes[3]
+	mi := &file_wishlist_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -237,7 +325,7 @@ func (x *AddItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddItemRequest.ProtoReflect.Descriptor instead.
 func (*AddItemRequest) Descriptor() ([]byte, []int) {
-	return file_wishlist_proto_rawDescGZIP(), []int{3}
+	return file_wishlist_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *AddItemRequest) GetUserId() int64 {
@@ -272,7 +360,7 @@ type UpdateItemRequest struct {
 
 func (x *UpdateItemRequest) Reset() {
 	*x = UpdateItemRequest{}
-	mi := &file_wishlist_proto_msgTypes[4]
+	mi := &file_wishlist_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -284,7 +372,7 @@ func (x *UpdateItemRequest) String() string {
 func (*UpdateItemRequest) ProtoMessage() {}
 
 func (x *UpdateItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wishlist_proto_msgTypes[4]
+	mi := &file_wishlist_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -297,7 +385,7 @@ func (x *UpdateItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateItemRequest.ProtoReflect.Descriptor instead.
 func (*UpdateItemRequest) Descriptor() ([]byte, []int) {
-	return file_wishlist_proto_rawDescGZIP(), []int{4}
+	return file_wishlist_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateItemRequest) GetUserId() int64 {
@@ -332,7 +420,7 @@ type DeleteItemRequest struct {
 
 func (x *DeleteItemRequest) Reset() {
 	*x = DeleteItemRequest{}
-	mi := &file_wishlist_proto_msgTypes[5]
+	mi := &file_wishlist_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -344,7 +432,7 @@ func (x *DeleteItemRequest) String() string {
 func (*DeleteItemRequest) ProtoMessage() {}
 
 func (x *DeleteItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wishlist_proto_msgTypes[5]
+	mi := &file_wishlist_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -357,7 +445,7 @@ func (x *DeleteItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteItemRequest.ProtoReflect.Descriptor instead.
 func (*DeleteItemRequest) Descriptor() ([]byte, []int) {
-	return file_wishlist_proto_rawDescGZIP(), []int{5}
+	return file_wishlist_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteItemRequest) GetUserId() int64 {
@@ -392,7 +480,7 @@ type CreateWishlistRequest struct {
 
 func (x *CreateWishlistRequest) Reset() {
 	*x = CreateWishlistRequest{}
-	mi := &file_wishlist_proto_msgTypes[6]
+	mi := &file_wishlist_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -404,7 +492,7 @@ func (x *CreateWishlistRequest) String() string {
 func (*CreateWishlistRequest) ProtoMessage() {}
 
 func (x *CreateWishlistRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wishlist_proto_msgTypes[6]
+	mi := &file_wishlist_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -417,7 +505,7 @@ func (x *CreateWishlistRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateWishlistRequest.ProtoReflect.Descriptor instead.
 func (*CreateWishlistRequest) Descriptor() ([]byte, []int) {
-	return file_wishlist_proto_rawDescGZIP(), []int{6}
+	return file_wishlist_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateWishlistRequest) GetUserId() int64 {
@@ -441,6 +529,50 @@ func (x *CreateWishlistRequest) GetIsPrivate() bool {
 	return false
 }
 
+type GetAllListsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllListsRequest) Reset() {
+	*x = GetAllListsRequest{}
+	mi := &file_wishlist_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllListsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllListsRequest) ProtoMessage() {}
+
+func (x *GetAllListsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_wishlist_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllListsRequest.ProtoReflect.Descriptor instead.
+func (*GetAllListsRequest) Descriptor() ([]byte, []int) {
+	return file_wishlist_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetAllListsRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 type GetWishListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -451,7 +583,7 @@ type GetWishListRequest struct {
 
 func (x *GetWishListRequest) Reset() {
 	*x = GetWishListRequest{}
-	mi := &file_wishlist_proto_msgTypes[7]
+	mi := &file_wishlist_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -463,7 +595,7 @@ func (x *GetWishListRequest) String() string {
 func (*GetWishListRequest) ProtoMessage() {}
 
 func (x *GetWishListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wishlist_proto_msgTypes[7]
+	mi := &file_wishlist_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -476,7 +608,7 @@ func (x *GetWishListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWishListRequest.ProtoReflect.Descriptor instead.
 func (*GetWishListRequest) Descriptor() ([]byte, []int) {
-	return file_wishlist_proto_rawDescGZIP(), []int{7}
+	return file_wishlist_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetWishListRequest) GetUserId() int64 {
@@ -504,7 +636,7 @@ type UpdateWishListRequest struct {
 
 func (x *UpdateWishListRequest) Reset() {
 	*x = UpdateWishListRequest{}
-	mi := &file_wishlist_proto_msgTypes[8]
+	mi := &file_wishlist_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -516,7 +648,7 @@ func (x *UpdateWishListRequest) String() string {
 func (*UpdateWishListRequest) ProtoMessage() {}
 
 func (x *UpdateWishListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wishlist_proto_msgTypes[8]
+	mi := &file_wishlist_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -529,7 +661,7 @@ func (x *UpdateWishListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateWishListRequest.ProtoReflect.Descriptor instead.
 func (*UpdateWishListRequest) Descriptor() ([]byte, []int) {
-	return file_wishlist_proto_rawDescGZIP(), []int{8}
+	return file_wishlist_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UpdateWishListRequest) GetUserId() int64 {
@@ -563,7 +695,7 @@ type DeleteWishListRequest struct {
 
 func (x *DeleteWishListRequest) Reset() {
 	*x = DeleteWishListRequest{}
-	mi := &file_wishlist_proto_msgTypes[9]
+	mi := &file_wishlist_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -575,7 +707,7 @@ func (x *DeleteWishListRequest) String() string {
 func (*DeleteWishListRequest) ProtoMessage() {}
 
 func (x *DeleteWishListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_wishlist_proto_msgTypes[9]
+	mi := &file_wishlist_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -588,7 +720,7 @@ func (x *DeleteWishListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteWishListRequest.ProtoReflect.Descriptor instead.
 func (*DeleteWishListRequest) Descriptor() ([]byte, []int) {
-	return file_wishlist_proto_rawDescGZIP(), []int{9}
+	return file_wishlist_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *DeleteWishListRequest) GetUserId() int64 {
@@ -614,7 +746,7 @@ type DeleteWishListResponse struct {
 
 func (x *DeleteWishListResponse) Reset() {
 	*x = DeleteWishListResponse{}
-	mi := &file_wishlist_proto_msgTypes[10]
+	mi := &file_wishlist_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -626,7 +758,7 @@ func (x *DeleteWishListResponse) String() string {
 func (*DeleteWishListResponse) ProtoMessage() {}
 
 func (x *DeleteWishListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_wishlist_proto_msgTypes[10]
+	mi := &file_wishlist_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -639,7 +771,7 @@ func (x *DeleteWishListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteWishListResponse.ProtoReflect.Descriptor instead.
 func (*DeleteWishListResponse) Descriptor() ([]byte, []int) {
-	return file_wishlist_proto_rawDescGZIP(), []int{10}
+	return file_wishlist_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *DeleteWishListResponse) GetMsg() string {
@@ -653,13 +785,17 @@ var File_wishlist_proto protoreflect.FileDescriptor
 
 const file_wishlist_proto_rawDesc = "" +
 	"\n" +
-	"\x0ewishlist.proto\x12\bwishlist\"\x81\x01\n" +
-	"\x10WishListResponse\x12\x0e\n" +
+	"\x0ewishlist.proto\x12\bwishlist\"f\n" +
+	"\x10WishListResponse\x12(\n" +
+	"\x05title\x18\x01 \x01(\v2\x12.wishlist.WishListR\x05title\x12(\n" +
+	"\x05items\x18\x02 \x03(\v2\x12.wishlist.ItemRespR\x05items\"4\n" +
+	"\bAllLists\x12(\n" +
+	"\x05lists\x18\x01 \x03(\v2\x12.wishlist.WishListR\x05lists\"O\n" +
+	"\bWishList\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05title\x12\x1d\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12\x1d\n" +
 	"\n" +
-	"is_private\x18\x04 \x01(\bR\tisPrivate\x12(\n" +
-	"\x05items\x18\x05 \x03(\v2\x12.wishlist.ItemRespR\x05items\"A\n" +
+	"is_private\x18\x03 \x01(\bR\tisPrivate\"A\n" +
 	"\aItemReq\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\"R\n" +
@@ -686,7 +822,9 @@ const file_wishlist_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x1d\n" +
 	"\n" +
-	"is_private\x18\x03 \x01(\bR\tisPrivate\"N\n" +
+	"is_private\x18\x03 \x01(\bR\tisPrivate\"-\n" +
+	"\x12GetAllListsRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"N\n" +
 	"\x12GetWishListRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\vwishlist_id\x18\x02 \x01(\x03R\n" +
@@ -700,9 +838,10 @@ const file_wishlist_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\"*\n" +
 	"\x16DeleteWishListResponse\x12\x10\n" +
-	"\x03msg\x18\x01 \x01(\tR\x03msg2\x9c\x04\n" +
+	"\x03msg\x18\x01 \x01(\tR\x03msg2\xdd\x04\n" +
 	"\x0fWishlistService\x12M\n" +
-	"\x0eCreateWishlist\x12\x1f.wishlist.CreateWishlistRequest\x1a\x1a.wishlist.WishListResponse\x12G\n" +
+	"\x0eCreateWishlist\x12\x1f.wishlist.CreateWishlistRequest\x1a\x1a.wishlist.WishListResponse\x12?\n" +
+	"\vGetAllLists\x12\x1c.wishlist.GetAllListsRequest\x1a\x12.wishlist.AllLists\x12G\n" +
 	"\vGetWishList\x12\x1c.wishlist.GetWishListRequest\x1a\x1a.wishlist.WishListResponse\x12M\n" +
 	"\x0eUpdateWishList\x12\x1f.wishlist.UpdateWishListRequest\x1a\x1a.wishlist.WishListResponse\x12S\n" +
 	"\x0eDeleteWishList\x12\x1f.wishlist.DeleteWishListRequest\x1a .wishlist.DeleteWishListResponse\x12?\n" +
@@ -724,43 +863,50 @@ func file_wishlist_proto_rawDescGZIP() []byte {
 	return file_wishlist_proto_rawDescData
 }
 
-var file_wishlist_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_wishlist_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_wishlist_proto_goTypes = []any{
 	(*WishListResponse)(nil),       // 0: wishlist.WishListResponse
-	(*ItemReq)(nil),                // 1: wishlist.ItemReq
-	(*ItemResp)(nil),               // 2: wishlist.ItemResp
-	(*AddItemRequest)(nil),         // 3: wishlist.AddItemRequest
-	(*UpdateItemRequest)(nil),      // 4: wishlist.UpdateItemRequest
-	(*DeleteItemRequest)(nil),      // 5: wishlist.DeleteItemRequest
-	(*CreateWishlistRequest)(nil),  // 6: wishlist.CreateWishlistRequest
-	(*GetWishListRequest)(nil),     // 7: wishlist.GetWishListRequest
-	(*UpdateWishListRequest)(nil),  // 8: wishlist.UpdateWishListRequest
-	(*DeleteWishListRequest)(nil),  // 9: wishlist.DeleteWishListRequest
-	(*DeleteWishListResponse)(nil), // 10: wishlist.DeleteWishListResponse
+	(*AllLists)(nil),               // 1: wishlist.AllLists
+	(*WishList)(nil),               // 2: wishlist.WishList
+	(*ItemReq)(nil),                // 3: wishlist.ItemReq
+	(*ItemResp)(nil),               // 4: wishlist.ItemResp
+	(*AddItemRequest)(nil),         // 5: wishlist.AddItemRequest
+	(*UpdateItemRequest)(nil),      // 6: wishlist.UpdateItemRequest
+	(*DeleteItemRequest)(nil),      // 7: wishlist.DeleteItemRequest
+	(*CreateWishlistRequest)(nil),  // 8: wishlist.CreateWishlistRequest
+	(*GetAllListsRequest)(nil),     // 9: wishlist.GetAllListsRequest
+	(*GetWishListRequest)(nil),     // 10: wishlist.GetWishListRequest
+	(*UpdateWishListRequest)(nil),  // 11: wishlist.UpdateWishListRequest
+	(*DeleteWishListRequest)(nil),  // 12: wishlist.DeleteWishListRequest
+	(*DeleteWishListResponse)(nil), // 13: wishlist.DeleteWishListResponse
 }
 var file_wishlist_proto_depIdxs = []int32{
-	2,  // 0: wishlist.WishListResponse.items:type_name -> wishlist.ItemResp
-	1,  // 1: wishlist.AddItemRequest.items:type_name -> wishlist.ItemReq
-	1,  // 2: wishlist.UpdateItemRequest.items:type_name -> wishlist.ItemReq
-	6,  // 3: wishlist.WishlistService.CreateWishlist:input_type -> wishlist.CreateWishlistRequest
-	7,  // 4: wishlist.WishlistService.GetWishList:input_type -> wishlist.GetWishListRequest
-	8,  // 5: wishlist.WishlistService.UpdateWishList:input_type -> wishlist.UpdateWishListRequest
-	9,  // 6: wishlist.WishlistService.DeleteWishList:input_type -> wishlist.DeleteWishListRequest
-	3,  // 7: wishlist.WishlistService.AddItem:input_type -> wishlist.AddItemRequest
-	4,  // 8: wishlist.WishlistService.UpdateItem:input_type -> wishlist.UpdateItemRequest
-	5,  // 9: wishlist.WishlistService.DeleteItem:input_type -> wishlist.DeleteItemRequest
-	0,  // 10: wishlist.WishlistService.CreateWishlist:output_type -> wishlist.WishListResponse
-	0,  // 11: wishlist.WishlistService.GetWishList:output_type -> wishlist.WishListResponse
-	0,  // 12: wishlist.WishlistService.UpdateWishList:output_type -> wishlist.WishListResponse
-	10, // 13: wishlist.WishlistService.DeleteWishList:output_type -> wishlist.DeleteWishListResponse
-	0,  // 14: wishlist.WishlistService.AddItem:output_type -> wishlist.WishListResponse
-	0,  // 15: wishlist.WishlistService.UpdateItem:output_type -> wishlist.WishListResponse
-	0,  // 16: wishlist.WishlistService.DeleteItem:output_type -> wishlist.WishListResponse
-	10, // [10:17] is the sub-list for method output_type
-	3,  // [3:10] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	2,  // 0: wishlist.WishListResponse.title:type_name -> wishlist.WishList
+	4,  // 1: wishlist.WishListResponse.items:type_name -> wishlist.ItemResp
+	2,  // 2: wishlist.AllLists.lists:type_name -> wishlist.WishList
+	3,  // 3: wishlist.AddItemRequest.items:type_name -> wishlist.ItemReq
+	3,  // 4: wishlist.UpdateItemRequest.items:type_name -> wishlist.ItemReq
+	8,  // 5: wishlist.WishlistService.CreateWishlist:input_type -> wishlist.CreateWishlistRequest
+	9,  // 6: wishlist.WishlistService.GetAllLists:input_type -> wishlist.GetAllListsRequest
+	10, // 7: wishlist.WishlistService.GetWishList:input_type -> wishlist.GetWishListRequest
+	11, // 8: wishlist.WishlistService.UpdateWishList:input_type -> wishlist.UpdateWishListRequest
+	12, // 9: wishlist.WishlistService.DeleteWishList:input_type -> wishlist.DeleteWishListRequest
+	5,  // 10: wishlist.WishlistService.AddItem:input_type -> wishlist.AddItemRequest
+	6,  // 11: wishlist.WishlistService.UpdateItem:input_type -> wishlist.UpdateItemRequest
+	7,  // 12: wishlist.WishlistService.DeleteItem:input_type -> wishlist.DeleteItemRequest
+	0,  // 13: wishlist.WishlistService.CreateWishlist:output_type -> wishlist.WishListResponse
+	1,  // 14: wishlist.WishlistService.GetAllLists:output_type -> wishlist.AllLists
+	0,  // 15: wishlist.WishlistService.GetWishList:output_type -> wishlist.WishListResponse
+	0,  // 16: wishlist.WishlistService.UpdateWishList:output_type -> wishlist.WishListResponse
+	13, // 17: wishlist.WishlistService.DeleteWishList:output_type -> wishlist.DeleteWishListResponse
+	0,  // 18: wishlist.WishlistService.AddItem:output_type -> wishlist.WishListResponse
+	0,  // 19: wishlist.WishlistService.UpdateItem:output_type -> wishlist.WishListResponse
+	0,  // 20: wishlist.WishlistService.DeleteItem:output_type -> wishlist.WishListResponse
+	13, // [13:21] is the sub-list for method output_type
+	5,  // [5:13] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_wishlist_proto_init() }
@@ -774,7 +920,7 @@ func file_wishlist_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_wishlist_proto_rawDesc), len(file_wishlist_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

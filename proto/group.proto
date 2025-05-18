@@ -46,9 +46,14 @@ message Group {
     string title = 2;
 }
 
+message Member {
+    int64 user_id = 1;
+    string username = 2;
+}
+
 message GroupResponse {
     Group title = 1;
-    repeated int64 members = 3;
+    repeated Member members = 2;
 }
 
 message AllGroupsResponse {
